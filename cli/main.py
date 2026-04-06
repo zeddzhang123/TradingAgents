@@ -926,9 +926,46 @@ def format_tool_args(args, max_length=80) -> str:
     return result
 
 def run_analysis():
-    # First get all user selections
+    """Interactive mode - prompt for all selections."""
     selections = get_user_selections()
+    _run_analysis_with_selections(selections)
 
+
+def run_analysis_auto(ticker: str):
+    """Run analysis with preset defaults, only ticker required."""
+    import os
+
+    # Auto mode defaults
+    selections = {
+        "ticker": ticker.strip().upper(),
+        "analysis_date": datetime.datetime.now().strftime("%Y-%m-%d"),
+        "analysts": [AnalystType.MARKET, AnalystType.SOCIAL, AnalystType.NEWS, AnalystType.FUNDAMENTALS],
+        "research_depth": 5,  # Deep
+        "llm_provider": "anthropic",
+        "backend_url": os.getenv("ANTHROPIC_API_URL", os.getenv("ANTHROPIC_BASE_URL", "https://api.anthropic.com/")),
+        "shallow_thinker": "claude-4-5-sonnet-20250929",
+        "deep_thinker": "claude-opus-4-5-20251101",
+        "google_thinking_level": None,
+        "openai_reasoning_effort": None,
+        "anthropic_effort": "high",
+        "output_language": "Chinese",
+    }
+
+    # Display brief config confirmation
+    console.print(Panel(
+        f"[bold]Auto Mode[/bold]\n"
+        f"Ticker: {selections['ticker']}\n"
+        f"Date: {selections['analysis_date']}\n"
+        f"Language: Chinese | Analysts: All | Depth: Deep\n"
+        f"LLM: Anthropic (Sonnet 4.5 / Opus 4.5) | Effort: High",
+        border_style="green"
+    ))
+
+    _run_analysis_with_selections(selections)
+
+
+def _run_analysis_with_selections(selections: dict):
+    """Core analysis logic, shared by interactive and auto modes."""
     # Create config with selected research depth
     config = DEFAULT_CONFIG.copy()
     config["max_debate_rounds"] = selections["research_depth"]
