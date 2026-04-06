@@ -1200,8 +1200,18 @@ def run_analysis():
 
 
 @app.command()
-def analyze():
-    run_analysis()
+def analyze(
+    auto: Optional[str] = typer.Option(
+        None,
+        "--auto",
+        "-a",
+        help="Auto mode: skip prompts, use defaults. Value is the ticker symbol."
+    )
+):
+    if auto:
+        run_analysis_auto(auto)
+    else:
+        run_analysis()
 
 
 if __name__ == "__main__":
