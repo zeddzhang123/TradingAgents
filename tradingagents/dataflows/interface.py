@@ -74,6 +74,7 @@ TOOLS_CATEGORIES = {
 }
 
 VENDOR_LIST = [
+    "finnhub",
     "yfinance",
     "alpha_vantage",
 ]
