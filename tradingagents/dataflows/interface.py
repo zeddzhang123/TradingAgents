@@ -24,6 +24,19 @@ from .alpha_vantage import (
 )
 from .alpha_vantage_common import AlphaVantageRateLimitError
 
+# Finnhub imports
+from .finnhub_stock import get_stock as get_finnhub_stock
+from .finnhub_indicator import get_indicators as get_finnhub_indicators
+from .finnhub_fundamentals import (
+    get_fundamentals as get_finnhub_fundamentals,
+    get_balance_sheet as get_finnhub_balance_sheet,
+    get_cashflow as get_finnhub_cashflow,
+    get_income_statement as get_finnhub_income_statement,
+    get_insider_transactions as get_finnhub_insider_transactions,
+)
+from .finnhub_news import get_news as get_finnhub_news, get_global_news as get_finnhub_global_news
+from .finnhub_common import FinnhubRateLimitError
+
 # Configuration and routing logic
 from .config import get_config
 
