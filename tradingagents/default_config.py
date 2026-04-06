@@ -25,11 +25,17 @@ DEFAULT_CONFIG = {
     "max_recur_limit": 100,
     # Data vendor configuration
     # Category-level configuration (default for all tools in category)
+    # Options: finnhub, alpha_vantage, yfinance
     "data_vendors": {
-        "core_stock_apis": "alpha_vantage",       # Options: alpha_vantage, yfinance
-        "technical_indicators": "alpha_vantage",  # Options: alpha_vantage, yfinance
-        "fundamental_data": "alpha_vantage",      # Options: alpha_vantage, yfinance
-        "news_data": "alpha_vantage",             # Options: alpha_vantage, yfinance
+        "core_stock_apis": "finnhub",
+        "technical_indicators": "finnhub",
+        "fundamental_data": "finnhub",
+        "news_data": "finnhub",
+        # NOTE: yfinance commented out due to frequent rate limiting
+        # "core_stock_apis": "yfinance",
+        # "technical_indicators": "yfinance",
+        # "fundamental_data": "yfinance",
+        # "news_data": "yfinance",
     },
     # Tool-level configuration (takes precedence over category-level)
     "tool_vendors": {
